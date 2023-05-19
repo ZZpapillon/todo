@@ -1,20 +1,19 @@
-export function createForm() {
+export function createForm(callback) {
     const container = document.querySelector('.container');
-    const content = document.querySelector('.content');
-    const clickButton = document.querySelector('.newProject')
+    const clickButton = document.querySelector('.newProject');
 
-    clickButton.addEventListener('click', () => {
+    
         // Clear existing content
-        
-       
-        container.classList.add('blur')
+        container.classList.add('blur');
+
         // Create the form container
         const formContainer = document.createElement('div');
         formContainer.classList.add('form-container');
         formContainer.style.display = 'block';
+
         // Create the form element
         const form = document.createElement('form');
-        form.classList.add('form')
+        form.classList.add('form');
 
         // Create the select input for category
         const selectLabel = document.createElement('label');
@@ -24,7 +23,6 @@ export function createForm() {
         const categories = ['Projects', 'Personal', 'Work'];
         categories.forEach((category) => {
             const option = document.createElement('option');
-            option.value = category.toLowerCase();
             option.textContent = category;
             selectInput.appendChild(option);
         });
@@ -46,38 +44,20 @@ export function createForm() {
         descriptionLabel.appendChild(descriptionInput);
 
         // Create the input for priority
-        // Create the select input for priority
         const priorityLabel = document.createElement('label');
         priorityLabel.textContent = 'Priority:';
-        const prioritySelect = document.createElement('select');
-        prioritySelect.name = 'priority';
 
-        // Create the options for priority colors
-        const priorityOptions = [
-            { value: 'gray', color: '#999' },
-            { value: 'blue', color: '#00f' },
-            { value: 'red', color: '#f00' },
-        ];
+        const priorityDiv = document.createElement('div');
 
-        priorityOptions.forEach((option) => {
-            const priorityOption = document.createElement('option');
-            priorityOption.value = option.value;
+        const grayCircle = createPriorityCircle('gray');
+        const blueCircle = createPriorityCircle('blue');
+        const redCircle = createPriorityCircle('red');
 
-            // Create a colored circle for each option
-            const circle = document.createElement('span');
-            circle.classList.add('priority-circle');
-            circle.style.backgroundColor = option.color;
+        priorityDiv.appendChild(grayCircle);
+        priorityDiv.appendChild(blueCircle);
+        priorityDiv.appendChild(redCircle);
 
-            // Append the circle to the option
-            priorityOption.appendChild(circle);
-
-            // Append the option to the select element
-            prioritySelect.appendChild(priorityOption);
-        });
-
-        priorityLabel.appendChild(prioritySelect);
-
-
+        priorityLabel.appendChild(priorityDiv);
 
         // Create the submit button
         const submitButton = document.createElement('button');
@@ -94,40 +74,58 @@ export function createForm() {
         // Append the form to the form container
         formContainer.appendChild(form);
 
-        // Append the form container to the content
-        document.body.appendChild(formContainer);
+        // Append the form container to the container
+        container.appendChild(formContainer);
 
         // Scroll to the form container
         container.scrollTo({
             top: formContainer.offsetTop,
             behavior: 'smooth',
         });
-       
-
 
         // Handle form submission
-        form.addEventListener('submit', (event) => {
+        const handleSubmit = (event) => {
             event.preventDefault();
 
             // Retrieve form values
             const category = selectInput.value;
             const title = titleInput.value;
             const description = descriptionInput.value;
-            const priority = priorityInput.value;
+            const priority = getSelectedPriority();
 
-            // Log the form values
-            console.log('Category:', category);
-            console.log('Title:', title);
-            console.log('Description:', description);
-            console.log('Priority:', priority);
+            callback(category, title, description, priority);
 
-            // Clear form inputs
-            selectInput.value = categories[0].toLowerCase();
-            titleInput.value = '';
-            descriptionInput.value = '';
-            priorityInput.value = '';
-            
-           
-        });
-    });
+            formContainer.remove();
+            container.classList.remove('blur');
+            form.reset();
+        };
+
+        form.addEventListener('submit', handleSubmit);
+
+        // Helper function to create a priority circle
+        function createPriorityCircle(color) {
+            const circle = document.createElement('span');
+            circle.classList.add('priority-circle');
+            circle.classList.add(color);
+            circle.addEventListener('click', () => {
+                grayCircle.classList.remove('selected');
+                blueCircle.classList.remove('selected');
+                redCircle.classList.remove('selected');
+                circle.classList.add('selected');
+            });
+            return circle;
+        }
+
+        // Helper function to get the selected priority
+        function getSelectedPriority() {
+            if (grayCircle.classList.contains('selected')) {
+                return 'gray';
+            } else if (blueCircle.classList.contains('selected')) {
+                return 'blue';
+            } else if (redCircle.classList.contains('selected')) {
+                return 'red';
+            }
+            return '';
+        }
+    
 }

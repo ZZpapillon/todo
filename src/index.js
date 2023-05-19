@@ -1,8 +1,10 @@
 import './style.css';
-import { ProjectGen, project } from './projectgenerator'
+import { ProjectGen } from './projectgenerator'
 import { createForm } from './form';
+import { contentDom } from './DOMposter';
+import { addEventListeners } from './domSwitcher';
 console.log('Radi radi')
-console.log(project.info())
+
 
 const container = document.querySelector('.container');
 const header = document.querySelector('.header');
@@ -41,6 +43,22 @@ clickButton.textContent = 'Click';
 content.appendChild(clickButton);
 
 
-   createForm()
-   
+clickButton.addEventListener('click', () => {
+    createForm((category, title, description, priority) => {
+        const project = new ProjectGen(category, title, description, priority);
+        contentDom.posts.domManipulator(project)
+        contentDom.posts.domPoster(project, content, priority)
+        console.log(project.info());
+    });
+});
+projects.addEventListener('click', (event) => {
+    addEventListeners.projects(event, selection, contentDom);
+});
 
+personal.addEventListener('click', (event) => {
+    addEventListeners.personal(event, selection, contentDom);
+});
+
+work.addEventListener('click', (event) => {
+    addEventListeners.work(event, selection, contentDom);
+});

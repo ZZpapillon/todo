@@ -1,18 +1,16 @@
 
 
 class ProjectGen {
-    constructor(title, describtion, priority, checklist) {
+    constructor(category, title, description, priority) {
+        this.category = category;
         this.title = title;
-        this.describtion = describtion;
+        this.description = description;
         this.priority = priority;
-        this.checklist = checklist;
     }
-    info = () => {
 
-        return (`title: ${this.title} describtion: ${this.describtion} priority: ${this.priority} checklist: ${this.checklist}`);
+    info() {
+        return `Category: ${this.category}, Title: ${this.title}, Description: ${this.description}, Priority: ${this.priority}`;
     }
 }
 
-    let project = new ProjectGen("title", "describtion", "priority", "checklist");
-
-export {ProjectGen, project};
+export { ProjectGen };

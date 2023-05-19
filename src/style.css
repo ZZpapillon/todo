@@ -30,21 +30,29 @@ body {
 
 .header {
     grid-area: header;
-    background-color: var(--light-gray);
+    background-image: url(icons/mountain.jpg);
+    background-size: cover;
+        /* Resizes the background image to cover the entire header */
+        background-position: center;
+        /* Centers the background image within the header */
+    opacity: 0.8;
     padding: 20px;
-    color: #333;
+    color: var(--light-blue);
     display: grid;
     grid-template-columns: 1fr 1fr 10fr;
     
 }
 .header-icon img {
-  width: 80px;
-  height: 80px
+  width: 90px;
+  height: 90px;
+  
 }
 .header-name {
-    font-size: 70px;
+    font-size: 90px;
     font-weight: bolder;
     white-space: nowrap;
+    text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+        /* Set the white shadow around the edges */
     
 }
 
@@ -59,7 +67,7 @@ body {
     grid-area: content;
     background-color: var(--light-gray);
     padding: 20px;
-    color: #333;
+    overflow-y: auto;
     border-top: 3px solid white;
 }
 
@@ -71,6 +79,7 @@ body {
     text-align: center;
     font-size: 25px;
     overflow: hidden;
+  
     
 }
 
@@ -134,7 +143,7 @@ body {
     left: 50%;
     transform: translate(-50%, -50%);
     width: 400px;
-    height: 500px;
+    height: 400px;
     background-color: #fff;
     border: 4px solid lightblue;
     border-radius: 10px;
@@ -174,7 +183,7 @@ body {
 }
 
 .form button[type="submit"] {
-    padding: 12px 20px;
+    padding: 15px 25px;
     border: none;
     border-radius: 5px;
     background-color: #007BFF;
@@ -218,9 +227,168 @@ body {
 
 .priority-circle {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     margin-right: 5px;
     vertical-align: middle;
+    border: 2px solid transparent;
+    margin-top: 10px;
 }
+
+.priority-circle.selected {
+    
+    display: inline-block;
+    border: 5px solid lightblue;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        margin-right: 5px;
+        vertical-align: middle;
+       
+}
+
+.priority-circle.gray {
+    background-color: gray;
+}
+
+.priority-circle.blue {
+    background-color: blue;
+}
+
+.priority-circle.red {
+    background-color: red;
+}
+
+.newPost {
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 0% 0% 0% 0% / 0% 0% 0% 0%;
+    box-shadow: 20px 20px rgba(84, 84, 84, 0.15);
+        transition: all .4s ease;
+}
+.newPost:hover {
+    border-radius: 0% 0% 50% 50% / 0% 0% 5% 5%;
+    box-shadow: 10px 10px rgba(93, 93, 93, 0.25);
+}
+
+.newPost .title {
+    font-weight: bold;
+}
+
+
+.content {
+    display: grid;
+    grid-template-columns: 1fr 10fr 1fr;
+    grid-auto-rows: min-content;
+    grid-template-areas:
+            "selection newpost newproject";
+            
+            
+    justify-items: center;
+        align-items: start;
+        gap: 30px;
+        
+}
+.selection {
+    grid-area: selection;
+}
+.newProject {
+    grid-area: newproject;
+    
+    
+}
+.newPost {
+    grid-area: newpost;
+    
+    
+    
+
+}
+.newPost:nth-child(1) {
+    grid-area: newpost;
+    /* Add this line to position the first newPost element */
+}
+
+.newPost:nth-child(n+2) {
+    grid-row-start: span 2;
+    /* Add this line to push subsequent newPost elements down by 1 row */
+}
+
+.checkbox-input {
+    height: 20px;
+    width: 20px;
+}
+
+.newPost {
+    display: grid;
+    grid-template-columns: 1fr 5fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-areas:
+        "priority title delete"
+        "checkbox description category"
+        ". . .";
+    grid-gap: 10px;
+    height: 70px;
+    width: 900px;
+    border-radius: 25px;
+    border: 2px solid white;
+    background-color: rgba(229, 229, 229, 0.5);
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+
+.deleteButton {
+    grid-area: delete;
+    height: 20px;
+    
+}
+
+.titlePart {
+    grid-area: title;
+}
+
+.checkbox-input {
+    grid-area: checkbox;
+  
+}
+
+.priorityPart {
+    grid-area: priority;
+    height: 10px;
+   
+}
+
+.categoryPart {
+    grid-area: category;
+    justify-self: end;
+    place-self: end;
+
+}
+
+.describtionPart {
+    grid-area: description;
+}
+
+.content {
+    background: linear-gradient(-45deg, #bdc3c7, #ffffff, #b3e6ff);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
