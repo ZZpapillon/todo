@@ -46,6 +46,10 @@ export const contentDom = (() => {
             projectArray.forEach((project) => {
                 const newPost = document.createElement('div');
                 newPost.classList.add('newPost');
+
+                
+
+               
                 
 
                 const category = document.createElement('div');
@@ -112,6 +116,8 @@ export const contentDom = (() => {
                 newPost.appendChild(describtion);
                 newPost.appendChild(priorityPart);
                 newPost.appendChild(checkbox);
+
+              
 
                 content.prepend(newPost);
             });
