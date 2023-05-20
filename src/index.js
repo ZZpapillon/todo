@@ -2,7 +2,9 @@ import './style.css';
 import { ProjectGen } from './projectgenerator'
 import { createForm } from './form';
 import { contentDom } from './DOMposter';
-import { addEventListeners } from './domSwitcher';
+import { domChecker } from './domSwitcher';
+
+
 console.log('Radi radi')
 
 
@@ -47,18 +49,13 @@ clickButton.addEventListener('click', () => {
     createForm((category, title, description, priority) => {
         const project = new ProjectGen(category, title, description, priority);
         contentDom.posts.domManipulator(project)
-        contentDom.posts.domPoster(project, content, priority)
-        console.log(project.info());
+        domChecker.checker(selection.textContent)
+
+        
+        
+        
     });
 });
-projects.addEventListener('click', (event) => {
-    addEventListeners.projects(event, selection, contentDom);
-});
-
-personal.addEventListener('click', (event) => {
-    addEventListeners.personal(event, selection, contentDom);
-});
-
-work.addEventListener('click', (event) => {
-    addEventListeners.work(event, selection, contentDom);
-});
+domChecker.changeOfSelection();
+domChecker.checker(selection)
+console.log(selection.textContent)

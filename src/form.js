@@ -95,6 +95,8 @@ export function createForm(callback) {
 
             callback(category, title, description, priority);
 
+            
+
             formContainer.remove();
             container.classList.remove('blur');
             form.reset();

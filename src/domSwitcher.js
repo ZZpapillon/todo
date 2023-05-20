@@ -1,34 +1,56 @@
 
 
-const today = document.querySelector('.today');
-const projects = document.querySelector('.projects');
-const personal = document.querySelector('.personal');
-const work = document.querySelector('.work');
-const content = document.querySelector('.content');
+import { contentDom } from './DOMposter';
 
 
-export const addEventListeners = {
-projects(event, selection, contentDom){
-    event.preventDefault();
-    selection.textContent = 'Projects:'
-    contentDom.posts.Projects.forEach((project) => {
-        contentDom.posts.domPoster()
-    })
-},
 
-    personal(event, selection, contentDom) {
-    event.preventDefault();
-    selection.textContent = 'Personal:'
-    contentDom.posts.Personal.forEach((project) => {
-        contentDom.posts.domPoster()
-    })
-},
+export const domChecker = (() => {
+    function checker(selection) {
+        if (selection === 'Today:') {
+            contentDom.posts.domPoster(contentDom.posts.Today)
+        }
+        if (selection === 'Projects:') {
+            contentDom.posts.domPoster(contentDom.posts.Projects)
+        }
+        if (selection === 'Personal:') {
+            contentDom.posts.domPoster(contentDom.posts.Personal)
+        }
+        if (selection === 'Work:') {
+            contentDom.posts.domPoster(contentDom.posts.Work)
+        }
+    }
 
-    work(event, selection, contentDom)  {
-    event.preventDefault();
-    selection.textContent = 'Work:'
-    contentDom.posts.Work.forEach((project) => {
-        contentDom.posts.domPoster()
-    })
-}
-}
+    function changeOfSelection() {
+        const today = document.querySelector('.today');
+        const projects = document.querySelector('.projects');
+        const personal = document.querySelector('.personal');
+        const work = document.querySelector('.work');
+        const selection = document.querySelector('.selection')
+
+        function handleSelectionChange(selectedText) {
+            selection.textContent = selectedText;
+            domChecker.checker(selection.textContent);
+        }
+
+        today.addEventListener('click', () => {
+            handleSelectionChange('Today:');
+            console.log(contentDom.posts.Today)
+        });
+        projects.addEventListener('click', () => {
+            handleSelectionChange('Projects:');
+        });
+        personal.addEventListener('click', () => {
+            handleSelectionChange('Personal:');
+        });
+        work.addEventListener('click', () => {
+            handleSelectionChange('Work:');
+        });
+        domChecker.checker(selection.textContent);
+    }
+
+    return {
+        checker,
+        changeOfSelection,
+    };
+})();
+
