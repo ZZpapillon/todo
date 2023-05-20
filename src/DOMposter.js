@@ -93,19 +93,19 @@ export const contentDom = (() => {
                             todayPosts.splice(todayIndex, 1);
                         }
 
-                        // Remove the post from the respective selection
-                        const selectionText = selection.textContent.replace(':', '');
-                        const selectionPosts = contentDom.posts[selectionText];
-                        const selectionIndex = selectionPosts.findIndex((post) => post === project);
-                        if (selectionIndex !== -1) {
-                            selectionPosts.splice(selectionIndex, 1);
+                        // Remove the post from the respective category section
+                        const categoryPosts = contentDom.posts[project.category];
+                        const categoryIndex = categoryPosts.findIndex((post) => post === project);
+                        if (categoryIndex !== -1) {
+                            categoryPosts.splice(categoryIndex, 1);
                         }
 
-                        // Update the display for "Today" and the respective selection
+                        // Update the display for "Today" and the respective category section
                         contentDom.posts.domPoster(contentDom.posts.Today);
-                        contentDom.posts.domPoster(selectionPosts);
+                        contentDom.posts.domPoster(contentDom.posts[selectionText]);
                     }
                 });
+
 
 
 
