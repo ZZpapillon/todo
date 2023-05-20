@@ -59,3 +59,5 @@ clickButton.addEventListener('click', () => {
 domChecker.changeOfSelection();
 domChecker.checker(selection)
 console.log(selection.textContent)
+
+

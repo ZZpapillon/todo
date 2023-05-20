@@ -23,7 +23,7 @@ body {
         "sidebar content"
         "footer footer";
     grid-template-rows: 1fr 11fr 1fr;
-    grid-template-columns: 1fr 5fr;
+    grid-template-columns: 1fr 6fr;
     height: 100vh;
 }
 
@@ -57,7 +57,7 @@ body {
 .sidebar {
     grid-area: sidebar;
     background-color: var(--light-blue);
-    padding: 20px;
+    padding: 10px;
     color: #fff;
 }
 
@@ -81,30 +81,68 @@ body {
 
 .sidebar {
     display: grid;
-    grid-template-columns: 1fr 5fr;
-    gap: 10px;
+    grid-template-columns: 1fr 8fr;
     border-top: 3px solid white;
     border-right: 3px solid white;
+    gap: 15px;
+    width: 250px;
+    box-sizing: border-box;
+    padding-top: 30px;
 }
 
 .icons {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 10fr;
-    gap: 15px;
+    gap: 25px;
     grid-template-columns: auto;
+    align-items: center;
+    place-items: end;
 }
 
 .icons img {
-    width: 35px;
-    height: 35px;
+    width: 45px;
+    height: 45px;
 }
 
 .todos {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr 10fr;
-    gap: 17px;
+    gap: 30px;
     grid-template-columns: auto;
     font-size: 25px;
+    justify-content: start;
+    place-items: start;
+    margin-top: 10px;
+}
+.work {
+    margin-top: -7px;
+}
+.highlighted {
+    color: #ffffff;
+    /* Set the text color to white */
+    font-weight: bold;
+
+    /* Adjust the font size to your preference */
+    background-color: #55a7ee;
+    /* Set the background color to light blue */
+    padding: 5px 10px;
+    margin-left: 20px;
+    /* Add some padding for spacing */
+    border-radius: 5px;
+    opacity: 0.9;
+    transform: scale(1.3);
+
+    /* Add rounded corners */
+}
+
+/* Add styles for the "Today" category icon */
+.highlighted-icons img {
+    transform: scale(1.4);
+    /* Set the height of the icon */
+    fill: #55a7ee;
+    /* Set the color of the icon to match the background */
+    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+    /* Add a drop shadow effect */
 }
 
 .selection {
@@ -327,7 +365,7 @@ body {
         ". . .";
     grid-gap: 10px;
     height: 70px;
-    width: 900px;
+    width: 760px;
     border-radius: 25px;
     border: 2px solid white;
     background-color: rgba(229, 229, 229, 0.5);
@@ -383,30 +421,5 @@ body {
     }
 }
 
-/* Add styles for the "Today" category */
-.today {
-    color: #ffffff;
-    /* Set the text color to white */
-    font-weight: bold;
-    font-size: 30px;
-    /* Adjust the font size to your preference */
-    background-color: #55a7ee;
-    /* Set the background color to light blue */
-    padding: 5px 10px;
-    /* Add some padding for spacing */
-    border-radius: 5px;
-    opacity: 0.9;
-    /* Add rounded corners */
-}
 
-/* Add styles for the "Today" category icon */
-.today-icon img {
-    width: 44px;
-    /* Set the width of the icon */
-    height: 44px;
-    /* Set the height of the icon */
-    fill: #55a7ee;
-    /* Set the color of the icon to match the background */
-    filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
-    /* Add a drop shadow effect */
-}
+
