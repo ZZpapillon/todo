@@ -9,24 +9,20 @@ export function saveProjectsToLocalStorage() {
 export function getProjectsFromLocalStorage() {
     const savedPosts = JSON.parse(localStorage.getItem('posts'));
     if (savedPosts) {
-        contentDom.posts.Today = savedPosts.Today || [];
-        contentDom.posts.Projects = savedPosts.Projects || [];
-        contentDom.posts.Personal = savedPosts.Personal || [];
-        contentDom.posts.Work = savedPosts.Work || [];
+        // Clear existing posts in each category array
+        contentDom.posts.Today.length = 0;
+        contentDom.posts.Projects.length = 0;
+        contentDom.posts.Personal.length = 0;
+        contentDom.posts.Work.length = 0;
+
+        
+
+        // Update the category arrays with retrieved data
+        savedPosts.Today.forEach((project) => {
+            contentDom.posts.domManipulator(project);
+            
+        });
     }
 }
 
-export function removeFromLocalStorage(project) {
-    const savedPosts = JSON.parse(localStorage.getItem('posts')) || {};
-    const updatedPosts = {
-        Today: removeProjectFromArray(savedPosts.Today, project),
-        Projects: removeProjectFromArray(savedPosts.Projects, project),
-        Personal: removeProjectFromArray(savedPosts.Personal, project),
-        Work: removeProjectFromArray(savedPosts.Work, project),
-    };
-    localStorage.setItem('posts', JSON.stringify(updatedPosts));
-}
 
-function removeProjectFromArray(array, project) {
-    return array.filter((p) => p !== project);
-}

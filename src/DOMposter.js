@@ -1,4 +1,4 @@
-import {removeFromLocalStorage, saveProjectsToLocalStorage } from "./storage";
+import {getProjectsFromLocalStorage, saveProjectsToLocalStorage } from "./storage";
 import { domChecker } from "./domSwitcher";
 
 
@@ -12,14 +12,17 @@ export const contentDom = (() => {
             posts.Today.push(project);
             if (project.category === 'Projects') {
                 posts.Projects.push(project);
+                // saveProjectsToLocalStorage()
                 
             }
             if (project.category === 'Personal') {
                 posts.Personal.push(project);
+                // saveProjectsToLocalStorage()
                 
             }
             if (project.category === 'Work') {
                 posts.Work.push(project);
+                // saveProjectsToLocalStorage()
                 
             }
             
@@ -42,6 +45,10 @@ export const contentDom = (() => {
                 const newPost = document.createElement('div');
                 newPost.classList.add('newPost');
 
+
+               
+
+                
                 
 
                
@@ -90,7 +97,7 @@ export const contentDom = (() => {
                         const todayIndex = todayPosts.findIndex((post) => post === project);
                         if (todayIndex !== -1) {
                             todayPosts.splice(todayIndex, 1);
-                            
+
                         }
 
                         // Remove the post from the respective category section
@@ -98,18 +105,22 @@ export const contentDom = (() => {
                         const categoryIndex = categoryPosts.findIndex((post) => post === project);
                         if (categoryIndex !== -1) {
                             categoryPosts.splice(categoryIndex, 1);
-                            
+
                         }
+
 
                         // Remove the project from local storage
                         saveProjectsToLocalStorage()
-                        
+
 
                         // Update the display for "Today" and the respective category section
-                        
+
                         domChecker.checker(selection)
                     }
                 });
+
+
+
 
 
         
@@ -131,6 +142,7 @@ export const contentDom = (() => {
             });
         },
     };
+    
 
     return {
         posts,

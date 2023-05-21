@@ -56,7 +56,6 @@ clickButton.addEventListener('click', () => {
         
         
         
-        
     });
 });
 domChecker.changeOfSelection();
@@ -76,14 +75,15 @@ const newProject = {
     dueDate: '2023-05-31',
 };
 
-contentDom.posts.domManipulator(newProject)
+
 
 
 
 // Retrieve the saved projects from local storage and update contentDom.posts when the page is loaded
 window.addEventListener('load', () => {
     getProjectsFromLocalStorage();
+    
     domChecker.checker(selection.textContent);
 });
 
-
+contentDom.posts.domManipulator(newProject)
