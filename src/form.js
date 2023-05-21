@@ -36,6 +36,14 @@ export function createForm(callback) {
         titleInput.name = 'title';
         titleLabel.appendChild(titleInput);
 
+    // Create the input for due date
+    const dueDateLabel = document.createElement('label');
+    dueDateLabel.textContent = 'Due Date:';
+    const dueDateInput = document.createElement('input');
+    dueDateInput.type = 'date';
+    dueDateInput.name = 'dueDate';
+    dueDateLabel.appendChild(dueDateInput);
+
         // Create the input for description
         const descriptionLabel = document.createElement('label');
         descriptionLabel.textContent = 'Description:';
@@ -67,6 +75,7 @@ export function createForm(callback) {
         // Append all the form elements to the form
         form.appendChild(selectLabel);
         form.appendChild(titleLabel);
+        form.appendChild(dueDateLabel);
         form.appendChild(descriptionLabel);
         form.appendChild(priorityLabel);
         form.appendChild(submitButton);
@@ -90,10 +99,11 @@ export function createForm(callback) {
             // Retrieve form values
             const category = selectInput.value;
             const title = titleInput.value;
+            const dueDate = dueDateInput.value;
             const description = descriptionInput.value;
             const priority = getSelectedPriority();
 
-            callback(category, title, description, priority);
+            callback(category, title, dueDate, description, priority);
 
             
 

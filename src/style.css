@@ -362,7 +362,7 @@ body {
     grid-template-areas:
         "priority title delete"
         "checkbox description category"
-        ". . .";
+        ". dueDate .";
     grid-gap: 10px;
     height: 70px;
     width: 760px;
@@ -372,7 +372,13 @@ body {
     overflow: hidden;
     
 }
-
+.dueDate {
+    grid-area: dueDate;
+    color: #0056b3;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
 .deleteButton {
     grid-area: delete;
     height: 20px;

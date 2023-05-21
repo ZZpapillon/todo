@@ -1,3 +1,7 @@
+import {removeFromLocalStorage, saveProjectsToLocalStorage } from "./storage";
+import { domChecker } from "./domSwitcher";
+
+
 export const contentDom = (() => {
     const posts = {
         Today: [],
@@ -8,40 +12,31 @@ export const contentDom = (() => {
             posts.Today.push(project);
             if (project.category === 'Projects') {
                 posts.Projects.push(project);
+                
             }
             if (project.category === 'Personal') {
                 posts.Personal.push(project);
+                
             }
             if (project.category === 'Work') {
                 posts.Work.push(project);
+                
             }
+            
+           
         },
 
         domPoster: function (projectArray) {
             const content = document.querySelector('.content'); // Get the content element
             const existingPosts = content.querySelectorAll('.newPost');
 
-            // const rowSpan = existingPosts.length + 5;
-
-            // existingPosts.forEach((post) => {
-            //     post.style.gridRowEnd = `span ${rowSpan}`;
-            // });
+            
 
             // Clear the existingPosts before appending new posts
             existingPosts.forEach((post) => {
                 post.remove();
             });
-            // const existingPosts = content.querySelectorAll('.newPost');
-            // if (!existingPosts || existingPosts.length === 0) {
-            //     return; // Exit the function if no "newPost" elements are found
-            // }
-            // const rowSpan = existingPosts.length + 2;
-
             
-
-            // existingPosts.forEach((post) => {
-            //     post.style.gridRowEnd = `span ${rowSpan}`;
-            // });
 
             projectArray.forEach((project) => {
                 const newPost = document.createElement('div');
@@ -59,6 +54,10 @@ export const contentDom = (() => {
                 const title = document.createElement('div');
                 title.classList.add('titlePart');
                 title.textContent = project.title;
+
+                const dueDate = document.createElement('div');
+                dueDate.classList.add('dueDate');
+                dueDate.textContent = project.dueDate;
 
                 const describtion = document.createElement('div');
                 describtion.classList.add('describtionPart');
@@ -80,7 +79,7 @@ export const contentDom = (() => {
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('deleteButton');
                 deleteButton.textContent = 'X';
-                deleteButton.addEventListener('click', () => {
+                deleteButton.addEventListener('click', (selection) => {
                     const index = projectArray.findIndex((post) => post === project);
                     if (index !== -1) {
                         projectArray.splice(index, 1);
@@ -91,6 +90,7 @@ export const contentDom = (() => {
                         const todayIndex = todayPosts.findIndex((post) => post === project);
                         if (todayIndex !== -1) {
                             todayPosts.splice(todayIndex, 1);
+                            
                         }
 
                         // Remove the post from the respective category section
@@ -98,14 +98,21 @@ export const contentDom = (() => {
                         const categoryIndex = categoryPosts.findIndex((post) => post === project);
                         if (categoryIndex !== -1) {
                             categoryPosts.splice(categoryIndex, 1);
+                            
                         }
 
+                        // Remove the project from local storage
+                        saveProjectsToLocalStorage()
+                        
+
                         // Update the display for "Today" and the respective category section
-                        contentDom.posts.domPoster(contentDom.posts.Today);
-                        contentDom.posts.domPoster(contentDom.posts[selectionText]);
+                        
+                        domChecker.checker(selection)
                     }
                 });
 
+
+        
 
 
 
@@ -113,6 +120,7 @@ export const contentDom = (() => {
                 newPost.appendChild(deleteButton);
                 newPost.appendChild(category);
                 newPost.appendChild(title);
+                newPost.appendChild(dueDate);
                 newPost.appendChild(describtion);
                 newPost.appendChild(priorityPart);
                 newPost.appendChild(checkbox);
@@ -133,5 +141,32 @@ export const contentDom = (() => {
 
 
 
+        // deleteButton.addEventListener('click', () => {
+                //     const index = projectArray.findIndex((post) => post === project);
+                //     if (index !== -1) {
+                //         projectArray.splice(index, 1);
+                //         newPost.remove();
+                       
+
+                //         // Remove the post from the "Today" section
+                //         const todayPosts = contentDom.posts.Today;
+                //         const todayIndex = todayPosts.findIndex((post) => post === project);
+                //         if (todayIndex !== -1) {
+                //             todayPosts.splice(todayIndex, 1);
+                //         }
+
+                //         // Remove the post from the respective category section
+                //         const categoryPosts = contentDom.posts[project.category];
+                //         const categoryIndex = categoryPosts.findIndex((post) => post === project);
+                //         if (categoryIndex !== -1) {
+                //             categoryPosts.splice(categoryIndex, 1);
+                //         }
+
+                //         // Update the display for "Today" and the respective category section
+                        
+                //         contentDom.posts.domPoster(contentDom.posts[selection.textContent]);
+                //         saveProjectsToLocalStorage();
+                //     }
+                // });
 
 
