@@ -34,16 +34,50 @@ const selection = document.createElement('div');
 selection.classList.add('selection');
 selection.textContent = 'Today:';
 
+
 // Append the selection div to the content element
 content.appendChild(selection);
 
 
 const clickButton = document.createElement('button');
-clickButton.classList.add('newProject')
-clickButton.textContent = 'Click';
+clickButton.classList.add('newProject');
+clickButton.textContent = 'New Todo';
+
+
+
+
+// Create container-stars div
+const containerStars = document.createElement('div');
+containerStars.id = 'container-stars';
+
+// Create stars div
+const stars = document.createElement('div');
+stars.id = 'stars';
+
+// Append stars div to container-stars div
+containerStars.appendChild(stars);
+
+// Create glow div
+const glow = document.createElement('div');
+glow.id = 'glow';
+
+// Create circle divs
+const circle1 = document.createElement('div');
+circle1.classList.add('circle');
+const circle2 = document.createElement('div');
+circle2.classList.add('circle');
+
+// Append circle divs to glow div
+glow.appendChild(circle1);
+glow.appendChild(circle2);
+
+// Append container-stars and glow to clickButton
+clickButton.appendChild(containerStars);
+clickButton.appendChild(glow);
 
 // Append the button to the content element
 content.appendChild(clickButton);
+
 
 
 clickButton.addEventListener('click', () => {
