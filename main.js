@@ -4039,7 +4039,7 @@ module.exports = __webpack_require__.p + "de9666d81037cf49084b.ttf";
   \****************************************************************************************************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "ef041aebec709f24bdec.jpg";
+module.exports = __webpack_require__.p + "purple-background-light-purple-center-crackled-glass-texture-design-abstract-color-splash-across-dark-border-pretty-46703603.jpg";
 
 /***/ }),
 
@@ -4049,7 +4049,7 @@ module.exports = __webpack_require__.p + "ef041aebec709f24bdec.jpg";
   \******************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-module.exports = __webpack_require__.p + "e9cc661ff9468b3c49a0.jpg";
+module.exports = __webpack_require__.p + "purple.jpg";
 
 /***/ }),
 
