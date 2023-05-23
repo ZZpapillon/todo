@@ -131,4 +131,4 @@ window.addEventListener('load', () => {
 });
 
 contentDom.posts.domManipulator(newProject)
-localStorage.clear()
+
