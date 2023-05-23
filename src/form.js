@@ -92,7 +92,9 @@ export function createForm(callback) {
     descriptionInput.name = 'description';
     descriptionInput.id = 'descriptionInput'; // Unique ID
     descriptionLabel.appendChild(descriptionInput);
+    
 
+    
     
     
     
@@ -100,9 +102,11 @@ export function createForm(callback) {
     
     // Create the input for priority
     const priorityLabel = document.createElement('label');
+    priorityLabel.id = 'priorityLabel'
     priorityLabel.textContent = 'Priority:';
 
     const priorityDiv = document.createElement('div');
+    priorityDiv.style.marginTop = '15px';
 
     const grayCircle = createPriorityCircle('gray');
     const blueCircle = createPriorityCircle('blue');
@@ -170,11 +174,17 @@ export function createForm(callback) {
         const formattedDueDate = format(dueDateValue, 'MMMM d, yyyy');
         const daysDifference = Math.ceil((dueDateValue - currentDate) / (1000 * 60 * 60 * 24));
         
+        if (dueDateValue < currentDate) {
+            // Display error message or prevent submission
+            // Example: Showing an alert message
+            alert('Selected due date must not be in the past!');
+            return;
+        }
         // Retrieve form values
         const category = selectInput.value;
         const title = titleInput.value;
         const dueDate = `${daysDifference} Days Away (${formattedDueDate})`
-        const description = descriptionInput.value;
+        const description = descriptionInput.value
         const priority = getSelectedPriority();
 
         callback(category, title, dueDate, description, priority);

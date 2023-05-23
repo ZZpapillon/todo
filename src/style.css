@@ -47,9 +47,25 @@ body {
     grid-template-columns: 1fr 1fr 10fr;
 }
 
+.header-icon {
+    background-color: white;
+    height: 100px;
+    width: 100px;
+    border-radius: 70px;
+    justify-self: center;
+        place-self: center;
+
+
+}
+
 .header-icon img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+        
+        border-radius: 80px;
+       
+    
    
 }
 
@@ -60,6 +76,7 @@ body {
     white-space: nowrap;
     text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
     /* Set the white shadow around the edges */
+    margin-left: 10px;
 }
 
 .sidebar {
@@ -72,7 +89,9 @@ body {
 
 .content {
     grid-area: content;
-    background-color: var(--light-gray);
+    
+    background-image: url(icons/purple-background-light-purple-center-crackled-glass-texture-design-abstract-color-splash-across-dark-border-pretty-46703603.jpg) !important;
+    background-size: cover !important;
     padding: 20px;
     overflow-y: auto;
     border-top: 3px solid white;
@@ -278,6 +297,8 @@ body {
     margin-bottom: 2px;
 }
 
+
+
 .form textarea {
     min-height: 30px;
     max-height: 50px;
@@ -303,6 +324,7 @@ body {
     margin-right: 5px;
     vertical-align: middle;
     border: 2px solid transparent;
+    
     
     
         
@@ -371,6 +393,7 @@ body {
     align-items: start;
     grid-column-gap: 40px;
     grid-row-gap: 30px;
+    overflow-y: auto;
 }
 
 
@@ -389,6 +412,7 @@ body {
 }
 .newPostWrapper {
     grid-column: newpost;
+    
   
  
 }
@@ -447,10 +471,10 @@ body {
     opacity: 0;
     left: 50%;
     top: 40%;
-    width: 11px;
-    height: 25px;
-    border: 2px solid purple;
-    filter: drop-shadow(0px 0px 5px purple) drop-shadow(0px 0px 5px purple) drop-shadow(0px 0px 10px purple);
+    width: 10px;
+    height: 27px;
+    border: 2px solid rgb(255, 0, 144);
+    filter: drop-shadow(0px 0px 5px rgb(69, 0, 69)) drop-shadow(0px 0px 5px rgb(56, 0, 56)) drop-shadow(0px 0px 10px rgb(56, 0, 56));
         /* Multiple drop-shadow values */
     border-width: 0 2.5px 2.5px 0;
     transition: .2s linear;
@@ -525,8 +549,8 @@ body {
 
 .dueDate {
     grid-area: dueDate;
-    color:rgb(0, 150, 150);
-    font-size: 18px;
+    color:rgb(168, 0, 0);
+    font-size: 20px;
     font-weight: bolder;
     
         
@@ -536,11 +560,11 @@ body {
     
     @keyframes glowing {
         0% {
-            text-shadow: 0 0 3px rgb(255, 0, 144);
+            text-shadow: 0 0 2px rgb(0, 0, 0);
         }
     
         100% {
-            text-shadow: 0 0 10px rgb(230, 0, 255);
+            text-shadow: 0 0 4px rgb(0, 0, 0);
         }
     }
     
@@ -577,11 +601,12 @@ body {
         display: flex;
         align-items: center;
         justify-content: center;
+       
     }
     
     .deleteButton svg {
         width: 15px;
-        fill: #eee;
+        fill: #ff5c92;
         margin-right: 36px;
     }
     
@@ -676,11 +701,13 @@ body {
     min-height: 10px;
         width: 710px;
     background-color: rgba(27, 27, 27, 0.5);
-    font-size: 15px;
+    font-size: 17px;
     text-align: start;
     font-weight: bold;
+    white-space: pre-wrap;
     color: white;
     padding: 15px;
+    overflow: auto;
         
         border-bottom: 2px solid #e8adc7;
         animation: glowingBord 1.5s ease-in-out infinite;
@@ -688,6 +715,14 @@ body {
     
     
 }
+.describtionPart:focus {
+    border: 2px solid rebeccapurple;
+    /* Apply your desired border style when focused */
+    outline: none;
+    /* Remove the default outline */
+}
+
+
 .describtionPart.show {
     display: block;
 }

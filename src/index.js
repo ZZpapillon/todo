@@ -41,7 +41,7 @@ content.appendChild(selection);
 
 const clickButton = document.createElement('button');
 clickButton.classList.add('newProject');
-clickButton.textContent = 'New Todo';
+clickButton.textContent = 'New ToDo';
 
 
 
@@ -83,7 +83,9 @@ content.appendChild(clickButton);
 
 clickButton.addEventListener('click', () => {
     createForm((category, title, dueDate, description, priority) => {
-        const project = new ProjectGen(category, title, dueDate, description, priority);
+        const checked = false
+        const project = new ProjectGen(category, title, dueDate, description, priority, checked);
+        
         contentDom.posts.domManipulator(project)
         domChecker.checker(selection.textContent)
         saveProjectsToLocalStorage()
@@ -104,10 +106,17 @@ console.log(selection.textContent)
 // // Example usage:
 const newProject = {
     category: 'Projects',
-    title: 'New Project',
-    description: 'Description of the new project',
-    priority: 'blue',
-    dueDate: '2023-05-31',
+    title: 'Example Project: Click on me!',
+    description: `This is a ToDo App that has a lot of functions and can remember your todos after you leave
+                When clicking New Todo,you can choose category,title,description,level of priority and dueDate.
+                You can exit form by clicking ESC if you change your mind. After finishing todo,you can click on circle left and mark it or just delete it on x button on the right.
+                You also have option to click left on specific categories you want to see.
+                Your projects are formated by dates.
+                You can even edit description once you make a new Todo,clicking on it and after editing pressing ESC.
+                 Have fun!`,
+    priority: 'red',
+    dueDate: '2 Years Away (July 12,2025)',
+    checked: false
 };
 
 
@@ -122,3 +131,4 @@ window.addEventListener('load', () => {
 });
 
 contentDom.posts.domManipulator(newProject)
+localStorage.clear()

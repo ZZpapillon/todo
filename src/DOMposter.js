@@ -78,7 +78,7 @@ export const contentDom = (() => {
 
                 const describtion = document.createElement('div');
                 describtion.classList.add('describtionPart');
-                describtion.textContent = project.description;
+                describtion.innerHTML = project.description;
 
                 const priorityPart = document.createElement('div');
                 priorityPart.classList.add('priorityPart');
@@ -104,15 +104,19 @@ export const contentDom = (() => {
                 const checkmark = document.createElement('span');
                 checkmark.classList.add('checkmark');
                 checkbox.appendChild(checkmark);
+                
+                checkboxInput.checked = project.checked;
 
-                checkboxInput.addEventListener('change', () => {
-                    localStorage.setItem('checkboxState', checkboxInput.checked);
+                checkboxInput.addEventListener('click', function () {
+                    // Toggle the checked property of the project
+                    project.checked = !project.checked;
+
+                    // Update the checkbox state
+                    checkboxInput.checked = project.checked;
+
+                    // Save the updated projects to localStorage
+                    saveProjectsToLocalStorage();
                 });
-                // Retrieve the checkbox state from localStorage and set the initial state
-                const storedCheckboxState = localStorage.getItem('checkboxState');
-                if (storedCheckboxState === 'true') {
-                    checkboxInput.checked = true;
-                }
 
 
 
@@ -134,10 +138,49 @@ export const contentDom = (() => {
                         describtion.classList.add('show');
                     }
                    
-                
-                   
-                    
                 });
+                const todos = document.querySelector('.todos');
+                todos.addEventListener('click', (event) => {
+                    const clickedElement = event.target;
+                    const activeDescribtion = document.querySelector('.describtionPart.show');
+
+                    if (activeDescribtion) {
+                        activeDescribtion.classList.remove('show');
+                    }
+                });
+                const newProjectElement = document.querySelector('.newProject');
+                newProjectElement.addEventListener('click', () => {
+                    const activeDescribtion = document.querySelector('.describtionPart.show');
+
+                    if (activeDescribtion) {
+                        activeDescribtion.classList.remove('show');
+                    }
+                });
+
+
+                describtion.addEventListener('click', function () {
+                    describtion.contentEditable = 'true';
+                    describtion.focus();
+                });
+
+                // Add a blur event listener to save the edited content when focus is lost
+                describtion.addEventListener('blur', function () {
+                    describtion.contentEditable = 'false';
+                    project.description = describtion.textContent; // Save the edited content to the project object or wherever you need it
+                    saveProjectsToLocalStorage()
+                });
+
+                function handleEscapeKey(event) {
+                    if (event.key === 'Escape') {
+                        describtion.blur(); // Remove focus from the div
+                    }
+                }
+
+                document.addEventListener('keydown', handleEscapeKey);
+
+
+
+                
 
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('deleteButton');
