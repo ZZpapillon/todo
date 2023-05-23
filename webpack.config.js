@@ -16,16 +16,15 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.svg$/i,
-                include: path.resolve(__dirname, 'src/icons'),
+                test: /\.(png|jpe?g|gif)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'icons/[name][ext]', // Specify the output folder within the "dist" directory
+                    filename: '[name][ext]', // Specify the output folder within the "dist" directory for images
                 },
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
+                test: /\.svg$/i,
+                type: 'asset/inline', // Embed SVG images as data URIs
             },
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
