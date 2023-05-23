@@ -1,5 +1,6 @@
 import {getProjectsFromLocalStorage, saveProjectsToLocalStorage } from "./storage";
 import { domChecker } from "./domSwitcher";
+import { parseISO } from 'date-fns';
 
 
 export const contentDom = (() => {
@@ -32,6 +33,7 @@ export const contentDom = (() => {
         domPoster: function (projectArray) {
             const content = document.querySelector('.content'); // Get the content element
             const existingPosts = content.querySelectorAll('.newPost');
+            
 
             
 
@@ -39,9 +41,17 @@ export const contentDom = (() => {
             existingPosts.forEach((post) => {
                 post.remove();
             });
+            projectArray.sort((a, b) => {
+                const daysA = parseInt(a.dueDate.split(' ')[0]);
+                const daysB = parseInt(b.dueDate.split(' ')[0]);
+                return daysB - daysA;
+            });
             
-
             projectArray.forEach((project) => {
+                
+                const newPostWrapper = document.createElement('div');
+                newPostWrapper.classList.add('newPostWrapper');
+                
                 const newPost = document.createElement('div');
                 newPost.classList.add('newPost');
 
@@ -79,18 +89,66 @@ export const contentDom = (() => {
 
                 priorityPart.appendChild(selectedCircle);
 
-                const checkbox = document.createElement('input');
-                checkbox.type = 'checkbox';
+                const checkbox = document.createElement('label');
                 checkbox.classList.add('checkbox-input');
+
+                const innerLabel = document.createElement('label');
+                innerLabel.setAttribute('for', 'checkbox');
+                checkbox.appendChild(innerLabel);
+
+                const checkboxInput = document.createElement('input');
+                checkboxInput.type = 'checkbox';
+                checkboxInput.id = 'checkbox';
+                checkbox.appendChild(checkboxInput);
+
+                const checkmark = document.createElement('span');
+                checkmark.classList.add('checkmark');
+                checkbox.appendChild(checkmark);
+
+                checkboxInput.addEventListener('change', () => {
+                    localStorage.setItem('checkboxState', checkboxInput.checked);
+                });
+                // Retrieve the checkbox state from localStorage and set the initial state
+                const storedCheckboxState = localStorage.getItem('checkboxState');
+                if (storedCheckboxState === 'true') {
+                    checkboxInput.checked = true;
+                }
+
+
+
+
+                newPost.addEventListener('click', () => {
+                    const activeDescribtion = document.querySelector('.describtionPart.show');
+
+                    if (activeDescribtion) {
+                        if (activeDescribtion === describtion) {
+                            // Clicked on the same new post, toggle the description visibility
+                            activeDescribtion.classList.toggle('show');
+                        } else {
+                            // Clicked on a different new post, close the active description and open the new one
+                            activeDescribtion.classList.remove('show');
+                            describtion.classList.add('show');
+                        }
+                    } else {
+                        // No active description, open the clicked new post
+                        describtion.classList.add('show');
+                    }
+                   
+                
+                   
+                    
+                });
 
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('deleteButton');
-                deleteButton.textContent = 'X';
+                deleteButton.innerHTML = '<span class="text"></span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span>';
+                
+                
                 deleteButton.addEventListener('click', (selection) => {
                     const index = projectArray.findIndex((post) => post === project);
                     if (index !== -1) {
                         projectArray.splice(index, 1);
-                        newPost.remove();
+                        newPostWrapper.remove();
 
                         // Remove the post from the "Today" section
                         const todayPosts = contentDom.posts.Today;
@@ -132,13 +190,14 @@ export const contentDom = (() => {
                 newPost.appendChild(category);
                 newPost.appendChild(title);
                 newPost.appendChild(dueDate);
-                newPost.appendChild(describtion);
                 newPost.appendChild(priorityPart);
                 newPost.appendChild(checkbox);
 
               
-
-                content.prepend(newPost);
+                newPostWrapper.appendChild(newPost);
+                newPostWrapper.appendChild(describtion);
+                
+                content.prepend(newPostWrapper);
             });
         },
     };

@@ -75,6 +75,7 @@ glow.appendChild(circle2);
 clickButton.appendChild(containerStars);
 clickButton.appendChild(glow);
 
+
 // Append the button to the content element
 content.appendChild(clickButton);
 

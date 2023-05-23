@@ -7,11 +7,13 @@
 body {
     margin: 0;
     padding: 0;
-    /* Replace with your desired background color */
+     /* Replace with your desired background color */
     font-family: Arial, Helvetica, sans-serif;
     background: radial-gradient(#a23982, #1f1013);
+    overflow: hidden;
+    
         
-    }
+    } 
         
 
 :root {
@@ -25,9 +27,10 @@ body {
         "header header"
         "sidebar content"
         "footer footer";
-    grid-template-rows: 1fr 11fr 1fr;
+    grid-template-rows: 1fr 11fr 0.3fr;
     grid-template-columns: 1fr 6fr;
     height: 100vh;
+    overflow: hidden;
 }
 
 .header {
@@ -47,10 +50,12 @@ body {
 .header-icon img {
     width: 90px;
     height: 90px;
+   
 }
 
 .header-name {
     font-size: 90px;
+    color: white;
     font-weight: bolder;
     white-space: nowrap;
     text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
@@ -59,9 +64,10 @@ body {
 
 .sidebar {
     grid-area: sidebar;
-    /* background: radial-gradient(#a23982, #1f1013); */
+    
     padding: 10px;
     color: #fff;
+    
 }
 
 .content {
@@ -70,16 +76,18 @@ body {
     padding: 20px;
     overflow-y: auto;
     border-top: 3px solid white;
+    overflow-x: hidden;
 }
 
 .footer {
     grid-area: footer;
-    background-color: white;
+    
+    border-top: 1px solid white;
     padding: 3px;
-    color: #333;
+    color: white;
     text-align: center;
-    font-size: 25px;
-    overflow: hidden;
+    font-size: 20px;
+    
 }
 
 .sidebar {
@@ -91,6 +99,7 @@ body {
     width: 250px;
     box-sizing: border-box;
     padding-top: 30px;
+    overflow: hidden;
 }
 
 .icons {
@@ -149,21 +158,27 @@ body {
 }
 
 .selection {
-    font-size: 24px;
-        font-weight: bold;
-        color: white;
-        text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
-        background-color: purple;
-        padding: 10px;
-        border-radius: 5px;
-        border: 2px solid black;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    
+    display: flex;
+    color: white;
+    font-size: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 10rem;
+    height: 3rem;
+    background-size: 300% 300%;
+    backdrop-filter: blur(1rem);
+    border-radius: 5rem;
+    transition: 0.5s;
+    animation: gradient_301 5s ease infinite;
+    border: double 4px transparent;
+    background-image: linear-gradient(#212121, #212121), linear-gradient(137.48deg, #ffdb3b 10%, #FE53BB 45%, #8F51EA 67%, #0044ff 87%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
 }
 
 .content {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr; */
 }
 
 .newProject {
@@ -192,7 +207,7 @@ body {
     width: 400px;
     height: 400px;
     background-color: #fff;
-    border: 4px solid lightblue;
+    border: 4px solid purple;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 30px;
@@ -205,6 +220,7 @@ body {
 
 .form label {
     font-weight: bold;
+    
 }
 
 .form select,
@@ -212,7 +228,7 @@ body {
 .form textarea {
     width: 100%;
     padding: 10px;
-    border: 1px solid #C9D6DF;
+    border: 1px solid plum;
     border-radius: 5px;
     background-color: #FFFFFF;
     font-size: 14px;
@@ -235,7 +251,7 @@ body {
     padding: 15px 25px;
     border: none;
     border-radius: 5px;
-    background-color: #007BFF;
+    background-color: purple;
     color: #FFFFFF;
     font-size: 14px;
     font-weight: bold;
@@ -274,20 +290,46 @@ body {
     margin-left: 200px;
 }
 
+.form input[type='date'] {
+    border-color: purple;
+        background-color: lavender;
+}
+
 .priority-circle {
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     margin-right: 5px;
     vertical-align: middle;
     border: 2px solid transparent;
-    margin-top: 10px;
+    
+    
+        
+        animation: glowingEffect 2s ease-in-out infinite;
+    }
+    
+    @keyframes glowingEffect {
+        0% {
+            box-shadow: 0 0 3px 2px rgba(239, 9, 255, 0.817);
+            transform: scale(0.9);
+        }
+    
+        50% {
+            box-shadow: 0 0 5px 3px rgba(239, 9, 255, 0.817);
+            transform: scale(0.95);
+        }
+    
+        100% {
+            box-shadow: 0 0 3px 2px rgba(239, 9, 255, 0.817);
+            transform: scale(0.9);
+        }
+    
 }
 
 .priority-circle.selected {
     display: inline-block;
-    border: 5px solid lightblue;
+    border: 5px solid purple;
     width: 45px;
     height: 45px;
     border-radius: 50%;
@@ -309,10 +351,10 @@ body {
 
 
 
-.newPost:hover {
+/* .newPost:hover {
     border-radius: 0% 0% 50% 50% / 0% 0% 5% 5%;
     box-shadow: 10px 10px rgba(93, 93, 93, 0.25);
-}
+} */
 
 .newPost .title {
     font-weight: bold;
@@ -320,14 +362,17 @@ body {
 
 .content {
     display: grid;
-    grid-template-columns: 1fr 10fr 1fr;
-    grid-auto-rows: 100px;
+    grid-template-columns: 1fr 7fr 1fr;
+    grid-auto-rows: min-content;
+    transition: height 0.3s ease-in-out;
     grid-template-areas:
         "selection newpost newproject";
     justify-items: center;
     align-items: start;
-    gap: 30px;
+    grid-column-gap: 40px;
+    grid-row-gap: 30px;
 }
+
 
 .selection {
     grid-area: selection;
@@ -337,63 +382,262 @@ body {
     grid-area: newproject;
 }
 
-.newPost:nth-child(1) {
+.newPostWrapper:nth-child(1) {
     grid-area: newpost;
+    
    
 }
-.newPost {
+.newPostWrapper {
     grid-column: newpost;
+  
+ 
 }
 
 
 
+/* Customize the label (the checkbox) */
 .checkbox-input {
-    height: 20px;
-    width: 20px;
+    display: block;
+    position: relative;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox-input input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkbox-input label {
+    cursor: pointer;
+    font-size: 14px;
+}
+
+/* Create a custom checkbox */
+.checkbox-input .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 30px;
+    border: 2.5px solid purple;
+    border-radius: 30px;
+    background-color: transparent;
+    transition: .2s linear;
+}
+
+.checkbox-input input[type="checkbox"]:checked~.checkmark {
+    background-color: transparent;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkbox-input .checkmark:after {
+    content: "";
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    left: 50%;
+    top: 40%;
+    width: 11px;
+    height: 25px;
+    border: 2px solid purple;
+    filter: drop-shadow(0px 0px 5px purple) drop-shadow(0px 0px 5px purple) drop-shadow(0px 0px 10px purple);
+        /* Multiple drop-shadow values */
+    border-width: 0 2.5px 2.5px 0;
+    transition: .2s linear;
+    transform: translate(-50%, -50%) rotate(-90deg) scale(0.2);
+}
+
+/* Show the checkmark when checked */
+.checkbox-input input[type="checkbox"]:checked~.checkmark:after {
+    visibility: visible;
+    opacity: 1;
+    
+    transform: translate(-50%, -50%) rotate(0deg) scale(1.2);
+    animation: pulse 1s ease-in;
+}
+
+.checkbox-input input[type="checkbox"]:checked~.checkmark {
+    transform: rotate(45deg);
+    border: none;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) rotate(0deg) scale(1.6);
+    }
 }
 
 .newPost {
     display: grid;
-    grid-template-columns: 1fr 5fr 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-columns: 1.7fr 5fr 3fr;
+    grid-template-rows: 1fr 1r 5fr;
     grid-template-areas:
         "priority title delete"
-        "checkbox description category"
-        ". dueDate .";
+        "checkbox title category"
+        "checkbox dueDate category";
     grid-gap: 10px;
+    grid-column-gap: 17px;
     padding: 10px;
     height: 70px;
-    width: 760px;
-    border-radius: 25px;
-    border: 2px solid white;
-    background-color: rgba(27, 27, 27, 0.5);
-    overflow: hidden;
+    width: 720px;
+    border-top-right-radius: 50px;
+    /* border-bottom: 2px solid white; */
     
+    background-color: rgba(27, 27, 27, 0.5);
+    overflow: visible;
+    clip-path: polygon(30px 0, 820px 0, 820px 100px, 0 100px);
+    border-bottom: 2px solid #e8adc7;
+    animation: glowingBord 1.5s ease-in-out infinite;
+    position: relative;
 }
+
+@keyframes glowingBord {
+    0% {
+        box-shadow: 0 0 10px #FD3084;
+    }
+
+    50% {
+        box-shadow: 0 0 15px #FD3084;
+    }
+
+    100% {
+        box-shadow: 0 0 10px #FD3084;
+    }
+}
+
+
+
 .dueDate {
     grid-area: dueDate;
-    color: #0056b3;
-    font-size: 15px;
+    color:rgb(0, 150, 150);
+    font-size: 18px;
     font-weight: bolder;
-    margin-bottom: 10px;
-}
+    
+        
+        text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+        animation: glowing 2s ease-in-out infinite alternate;
+    }
+    
+    @keyframes glowing {
+        0% {
+            text-shadow: 0 0 3px rgb(255, 0, 144);
+        }
+    
+        100% {
+            text-shadow: 0 0 10px rgb(230, 0, 255);
+        }
+    }
+    
+
 .deleteButton {
     grid-area: delete;
-    height: 20px;
-}
+    width: 15px;
+        height: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        background: transparent;
+        border: none;
+         /* margin-right: 50px;  */
+       
+       
+       
+    }
+    
+    .deleteButton,
+    .deleteButton span {
+        transition: 200ms;
+    }
+    
+    
+    
+    .deleteButton .icon {
+        position: absolute;
+       
+       
+        transform: translateX(110px);
+        height: 50px;
+        width: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .deleteButton svg {
+        width: 15px;
+        fill: #eee;
+        margin-right: 36px;
+    }
+    
+    
+    
+    .deleteButton:hover .text {
+        color: transparent;
+    }
+    
+    .deleteButton:hover .icon {
+        width: 150px;
+        border-left: none;
+        
+        transform: translateX(0);
+    }
+    
+    .deleteButton:focus {
+        outline: none;
+    }
+    
+    .deleteButton:active .icon svg {
+        transform: scale(0.8);
+    }
+
 
 .titlePart {
     grid-area: title;
     color: white;
-}
+        font-size: 28px;
+        text-align: start;
+        align-self: end;
+        /* margin-left: 7px; */
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        font-weight: bold;
+    white-space: nowrap;
+    width: 550px;
+       
+    }
+    
+    
 
 .checkbox-input {
     grid-area: checkbox;
+    
 }
 
 .priorityPart {
     grid-area: priority;
-    height: 10px;
+    
+    justify-self: end;
+    
+        
+        
+    
+    
 }
 
 .categoryPart {
@@ -414,6 +658,7 @@ body {
             inset 0 0 0px 1px #F11271,
             inset 0 0 10px 2px #FD3084;
         transition: 100ms;
+        /* margin-bottom: 5px; */
     }
     
     .categoryPart:hover {
@@ -426,8 +671,25 @@ body {
     }
     
       
-.descriptionPart {
-    grid-area: description;
+.describtionPart {
+    display: none;
+    min-height: 10px;
+        width: 710px;
+    background-color: rgba(27, 27, 27, 0.5);
+    font-size: 15px;
+    text-align: start;
+    font-weight: bold;
+    color: white;
+    padding: 15px;
+        
+        border-bottom: 2px solid #e8adc7;
+        animation: glowingBord 1.5s ease-in-out infinite;
+        
+    
+    
+}
+.describtionPart.show {
+    display: block;
 }
 
 .content {
