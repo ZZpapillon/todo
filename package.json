@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ZZpapillon/todo#readme",
   "devDependencies": {
+    "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "style-loader": "^3.3.2",
     "webpack": "^5.82.1",

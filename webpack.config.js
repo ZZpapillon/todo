@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
     mode: 'development',
@@ -22,14 +23,23 @@ module.exports = {
                     filename: '[name][ext]', // Specify the output folder within the "dist" directory for images
                 },
             },
-            {
-                test: /\.svg$/i,
-                type: 'asset/inline', // Embed SVG images as data URIs
-            },
+           
             {
                 test: /\.(woff|woff2|eot|ttf|otf)$/i,
                 type: 'asset/resource',
             },
         ],
     },
+
+    plugins: [
+        new CopyWebpackPlugin({
+            patterns: [
+                {
+                    from: 'src/Icons', // Source directory
+                    to: 'icons/[name][ext]', // Output directory within "dist" for SVG files
+                },
+            ],
+        }),
+    ],
+    
 };
